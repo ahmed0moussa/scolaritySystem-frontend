@@ -85,9 +85,11 @@ export class AuthenticationService {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 roles: user.roles,
+                menuItems:user.menuItems,
                 token: token.token,
                 tokenType: 'Bearer'
             };
+              console.log(connectedUser.menuItems);
               localStorage.setItem('token', JSON.stringify(token));
               localStorage.setItem('currentUser', JSON.stringify(connectedUser));
                 

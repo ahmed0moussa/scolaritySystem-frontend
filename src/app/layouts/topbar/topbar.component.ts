@@ -46,6 +46,7 @@ export class TopbarComponent {
   totalNotify: number = 0;
   newNotify: number = 0;
   readNotify: number = 0;
+  namecurrentUser: any;
 
   constructor(@Inject(DOCUMENT) private document: any,
     private eventService: EventService,
@@ -55,6 +56,16 @@ export class TopbarComponent {
     public _cookiesService: CookieService) { }
 
   ngOnInit(): void {
+    const currentUserString = localStorage.getItem('currentUser');
+    if (currentUserString) {
+      const currentUser = JSON.parse(currentUserString);
+      if (currentUser.firstName=="admin") {
+        this.namecurrentUser = currentUser.firstName;
+      }else{
+        this.namecurrentUser = currentUser.firstName+" "+currentUser.lastName;
+      }
+      
+    }
     this.element = document.documentElement;
 
     this.cartData = cartList

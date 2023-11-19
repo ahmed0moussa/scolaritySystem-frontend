@@ -24,15 +24,20 @@ export class HorizontalTopbarComponent {
   }
 
   ngOnInit(): void {
-    // Menu Items
-    this.menuItems = MENU;
-    this.AllmenuItems = MENU;
-    // Initialize the navData and menuItems
-    this.navData = MENU;
-    this.menuItems = this.navData;
-    setTimeout(() => {
-      this.updateMenu();
-    }, 1000);
+    const currentUserString = localStorage.getItem('currentUser');
+    if (currentUserString) {
+      const currentUser = JSON.parse(currentUserString);
+      const MENU: MenuItem[] =currentUser.menuItems || [];
+      // Menu Items
+      // this.menuItems = MENU;
+      // this.AllmenuItems = MENU;
+      // Initialize the navData and menuItems
+      this.navData = MENU;
+      this.menuItems = this.navData;
+      setTimeout(() => {
+        this.updateMenu();
+      }, 1000);
+    }
   }
 
   /***
@@ -233,7 +238,7 @@ export class HorizontalTopbarComponent {
    * @param item menuItem
    */
   hasItems(item: MenuItem) {
-    return item.subItems !== undefined ? item.subItems.length > 0 : false;
+    return item.subItems != null && item.subItems.length > 0;
   }
 
   /**
