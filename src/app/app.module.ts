@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Page Route
@@ -16,6 +16,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // component
 import { AppComponent } from './app.component';
 import { AuthlayoutComponent } from './authlayout/authlayout.component';
+import { AuthInterceptor, authInterceptorProviders } from './core/helpers/auth.interceptor';
+import { JwtInterceptor } from '@auth0/angular-jwt';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -44,7 +46,10 @@ export function createTranslateLoader(http: HttpClient): any {
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    
+    authInterceptorProviders
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

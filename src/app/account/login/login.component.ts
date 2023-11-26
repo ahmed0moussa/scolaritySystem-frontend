@@ -71,7 +71,7 @@ export class LoginComponent {
       
       if (data) {
         localStorage.setItem('toast', 'true');
-        console.log(data);
+        
         this.router.navigate(['/']);
       }
     },(error)=>{

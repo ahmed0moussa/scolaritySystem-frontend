@@ -89,7 +89,7 @@ export class AuthenticationService {
                 token: token.token,
                 tokenType: 'Bearer'
             };
-              console.log(connectedUser.menuItems);
+              
               localStorage.setItem('token', JSON.stringify(token));
               localStorage.setItem('currentUser', JSON.stringify(connectedUser));
                 
