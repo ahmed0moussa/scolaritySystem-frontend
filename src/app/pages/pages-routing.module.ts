@@ -8,6 +8,9 @@ const routes: Routes = [
   {
     path: 'Utilisateurs', loadChildren: () => import('./utilisateurs/utilisateurs.module').then(m => m.UtilisateursModule)
   },
+  {
+    path: 'AffectationdeTaches', loadChildren: () => import('./affectationde-taches/affectationde-taches.module').then(m => m.AffectationdeTachesModule)
+  },
 ];
 
 @NgModule({

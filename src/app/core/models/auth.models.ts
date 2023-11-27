@@ -1,4 +1,5 @@
-import { MenuItem } from "src/app/layouts/horizontal-topbar/menu.model";
+import { MenuItem } from "./MenuItems";
+
 
 export class User {
   id?: number;

@@ -1,8 +1,9 @@
 import { Component, ElementRef, EventEmitter, HostListener, Output, Renderer2, ViewChild } from '@angular/core';
-import { MenuItem } from './menu.model';
+
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { MENU } from './menu';
+import { MenuItem } from 'src/app/core/models/MenuItems';
 
 @Component({
   selector: 'app-horizontal-topbar',
@@ -28,6 +29,7 @@ export class HorizontalTopbarComponent {
     if (currentUserString) {
       const currentUser = JSON.parse(currentUserString);
       const MENU: MenuItem[] =currentUser.menuItems || [];
+      console.log(MENU)
       // Menu Items
       // this.menuItems = MENU;
       // this.AllmenuItems = MENU;
@@ -35,7 +37,7 @@ export class HorizontalTopbarComponent {
       this.navData = MENU;
       this.menuItems = this.navData;
       setTimeout(() => {
-        this.updateMenu();
+        // this.updateMenu();
       }, 1000);
     }
   }
@@ -44,22 +46,22 @@ export class HorizontalTopbarComponent {
   /***
    * Activate droup down set
    */
-   ngAfterViewInit() {
-     this.initActiveMenu();
-     setTimeout(() => {
-      this.menuPosSetOnClicknHover();
-    }, 1000);
-  }
+  //  ngAfterViewInit() {
+  //    this.initActiveMenu();
+  //    setTimeout(() => {
+  //     this.menuPosSetOnClicknHover();
+  //   }, 1000);
+  // }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    setTimeout(() => {
-      this.updateMenu();
-    }, 1000);
-    setTimeout(() => {
-      this.menuPosSetOnClicknHover();
-    }, 1500);
-  }
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event: any) {
+  //   setTimeout(() => {
+  //     this.updateMenu();
+  //   }, 1000);
+  //   setTimeout(() => {
+  //     this.menuPosSetOnClicknHover();
+  //   }, 1500);
+  // }
 
     // Display Menu 
     updateMenu() {
@@ -236,9 +238,11 @@ export class HorizontalTopbarComponent {
 
   /**
    * Returns true or false if given menu item has child or not
-   * @param item menuItem
+  //  * @param item menuItem
    */
   hasItems(item: MenuItem) {
+    
+   
     return item.subItems != null && item.subItems.length > 0;
   }
 

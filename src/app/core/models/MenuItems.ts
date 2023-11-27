@@ -1,10 +1,13 @@
 import { Item } from "./Item";
 
-export interface MenuItems {
+export interface MenuItem {
      id:string  ;
      label:string ;
      icon:string ;
      link:string ;
-     SubItems:Item[] ;
+     subItems:Item[] ;
      active:boolean ;
+     
+   
+     
   }

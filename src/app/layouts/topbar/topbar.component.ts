@@ -102,14 +102,20 @@ export class TopbarComponent {
   }
 
   windowScroll() {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-      (document.getElementById('back-to-top') as HTMLElement).style.display = "block";
-      document.getElementById('page-topbar')?.classList.add('topbar-shadow')
-    } else {
-      (document.getElementById('back-to-top') as HTMLElement).style.display = "none";
-      document.getElementById('page-topbar')?.classList.remove('topbar-shadow')
+    const backToTopElement = document.getElementById('back-to-top') as HTMLElement;
+    const pageTopbarElement = document.getElementById('page-topbar');
+  
+    if (backToTopElement && pageTopbarElement) {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        backToTopElement.style.display = "block";
+        pageTopbarElement.classList.add('topbar-shadow');
+      } else {
+        backToTopElement.style.display = "none";
+        pageTopbarElement.classList.remove('topbar-shadow');
+      }
     }
   }
+  
 
   // Increment Decrement Quantity
   qty: number = 0;

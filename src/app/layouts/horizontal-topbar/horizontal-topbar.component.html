@@ -32,11 +32,11 @@
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <ng-container *ngFor="let item of menuItems">
-                    <li class="menu-title" *ngIf="item.isTitle"><span data-key="t-menu">{{ item.label | translate
+                    <li class="menu-title" *ngIf="item.isTitle&&item.active"><span data-key="t-menu">{{ item.label | translate
                             }}</span></li>
 
-                    <li class="nav-item" *ngIf="!item.isTitle && !item.isLayout">
-                        <a *ngIf="hasItems(item)" href="javascript:void(0);" class="is-parent nav-link menu-link"
+                    <li class="nav-item" *ngIf="!item.isTitle && !item.isLayout&&item.active">
+                        <a *ngIf="hasItems(item)&&item.active" href="javascript:void(0);" class="is-parent nav-link menu-link"
                             [ngClass]="{'has-arrow': !item.badge, 'has-dropdown': item.badge}" data-bs-toggle="collapse"
                             aria-expanded="false" (click)="toggleItem($event)">
                             <i class="{{ item.icon }} icon nav-icon" class=""></i>
@@ -45,7 +45,7 @@
                                 | translate}}</span>
                         </a>
 
-                        <a [routerLink]="item.link" *ngIf="!hasItems(item)"
+                        <a [routerLink]="item.link" *ngIf="!hasItems(item)&&item.active"
                             class="side-nav-link-ref nav-link menu-link">
                             <i class="bx {{ item.icon }} icon nav-icon" *ngIf="item.icon" class=""></i>
                             <span class=""> {{ item.label | translate }}</span>
@@ -53,22 +53,22 @@
                                 translate}}</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards" *ngIf="hasItems(item)">
-                            <ul *ngIf="hasItems(item)" class="nav nav-sm flex-column" aria-expanded="false">
+                            <ul *ngIf="hasItems(item)&&item.active" class="nav nav-sm flex-column" aria-expanded="false">
                                 <li *ngFor="let subitem of item.subItems" class="nav-item">
-                                    <a [routerLink]="subitem.link" *ngIf="!hasItems(subitem)" class="nav-link"
+                                    <a [routerLink]="subitem.link" *ngIf="!hasItems(subitem)&&subitem.active" class="nav-link"
                                         [attr.data-parent]="subitem.parentId" (click)="updateActive($event)">
                                         <i class="bx {{ subitem.icon }} icon nav-icon" *ngIf="subitem.icon"
                                             class=""></i>{{ subitem.label | translate}}
                                     </a>
-                                    <a *ngIf="hasItems(subitem)" class="nav-link" href="javascript:void(0);"
+                                    <a *ngIf="hasItems(subitem)&&subitem.active" class="nav-link" href="javascript:void(0);"
                                         [attr.data-parent]="subitem.parentId" data-bs-toggle="collapse"
                                         aria-expanded="false" (click)="toggleSubItem($event)">
                                         <i class="bx {{ subitem.icon }} icon nav-icon" *ngIf="subitem.icon"
                                             class=""></i>{{ subitem.label | translate}}
                                     </a>
-                                    <div class="collapse menu-dropdown" *ngIf="hasItems(subitem)">
+                                    <div class="collapse menu-dropdown" *ngIf="hasItems(subitem)&&subitem.active">
                                         <ul class="nav nav-sm flex-column" aria-expanded="false">
-                                            <li *ngFor="let subSubitem of subitem.subItems" class="nav-item">
+                                            <li  *ngFor="let subSubitem of subitem.subItems" class="nav-item">
                                                 <a [attr.data-parent]="subSubitem.parentId"
                                                     [routerLink]="subSubitem.link" *ngIf="!subSubitem.childItem"
                                                     class="nav-link" (click)="updateActive($event)">
@@ -77,7 +77,7 @@
 
                                                 <a [attr.data-parent]="subSubitem.parentId"
                                                     [routerLink]="subSubitem.link" data-bs-toggle="collapse"
-                                                    aria-expanded="false" *ngIf="subSubitem.childItem" class="nav-link"
+                                                    aria-expanded="false" *ngIf="subSubitem.childItem&&subSubitem.active" class="nav-link"
                                                     (click)="updateActive($event)">
                                                     {{ subSubitem.label | translate }}
                                                 </a>
