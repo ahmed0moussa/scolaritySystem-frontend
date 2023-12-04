@@ -11,6 +11,21 @@ const routes: Routes = [
   {
     path: 'AffectationdeTaches', loadChildren: () => import('./affectationde-taches/affectationde-taches.module').then(m => m.AffectationdeTachesModule)
   },
+  {
+    path: 'gestiondesetudiants', loadChildren: () => import('./gestiondesetudiants/gestiondesetudiants.module').then(m => m.GestiondesetudiantsModule)
+  },
+  {
+    path: 'gestiondesmatieres', loadChildren: () => import('./gestiondesmatieres/gestiondesmatieres.module').then(m => m.GestiondesmatieresModule)
+  },
+  {
+    path: 'gestiondesclasses', loadChildren: () => import('./gestiondesclasses/gestiondesclasses.module').then(m => m.GestiondesclassesModule)
+  },
+  {
+    path: 'gestiondesprofesseurs', loadChildren: () => import('./gestiondesprofesseurs/gestiondesprofesseurs.module').then(m => m.GestiondesprofesseursModule)
+  },
+  {
+    path: 'gestiondessalles', loadChildren: () => import('./gestiondessalles/gestiondessalles.module').then(m => m.GestiondessallesModule)
+  },
 ];
 
 @NgModule({
