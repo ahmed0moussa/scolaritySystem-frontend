@@ -32,5 +32,13 @@ export class EtudiantService {
   deleteEtudiant(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  uplodImage(etudiantsId: string, image: File){
+    const formData: FormData = new FormData();
+    
+    formData.append('image', image, image.name);
+    
+    return this.http.post(`${this.apiUrl}/uploadImage/${etudiantsId}`, formData);
+
+  }
 }
 

@@ -12,7 +12,7 @@ export interface Etudiant {
     emailParent: string;
     dateN: Date;
     lienN: string;
-    mail: string;
+    email: string;
     bac: string;
     anneeBac: Date;
     moyBac: number;

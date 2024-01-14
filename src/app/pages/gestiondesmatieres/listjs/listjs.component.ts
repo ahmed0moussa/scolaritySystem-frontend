@@ -15,6 +15,7 @@ import { ListService } from './listjs.service';
 import { UserProfileService } from 'src/app/core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/core/models/auth.models';
+import { MatiereService } from 'src/app/core/services/matiere.service';
 
 @Component({
   selector: 'app-listjs',
@@ -49,7 +50,7 @@ export class ListjsComponent {
   @ViewChildren(NgbdListSortableHeader) headers!: QueryList<NgbdListSortableHeader>;
     @ViewChild('showModal', { static: false }) showModal?: ModalDirective;
     @ViewChild('deleteModal', { static: false }) deleteModal?: ModalDirective;
-  constructor(public service: ListService, private formBuilder: UntypedFormBuilder, private pipe: DecimalPipe,private userService:UserProfileService,private toastr:ToastrService) {
+  constructor(public service: ListService, private formBuilder: UntypedFormBuilder, private pipe: DecimalPipe,private matiereService:MatiereService,private toastr:ToastrService) {
     this.ListJsList = service.countries$;
     console.log(this.ListJsList )
     this.total = service.total$;
@@ -88,7 +89,7 @@ this.findall();
     
   }
   findall() {
-    this.userService.fiddalluser().subscribe(
+    this.matiereService.getAllMatieres().subscribe(
       (user) => {
         this.ListJsDatas = user;
         console.log(user)
@@ -162,7 +163,7 @@ this.findall();
         );
         user.id = formData.ids;
         
-        this.userService.updateUser(formData.ids, formData).subscribe(
+        this.matiereService.updateMatiere(formData.ids, formData).subscribe(
           () => {
             console.log('User updated successfully', formData);
             this.toastr.success('Utilisateur modifié avec succès!', 'Success');
@@ -174,7 +175,7 @@ this.findall();
         );
       } else {
         // Add new data
-        this.userService.registerRh(formData).subscribe(
+        this.matiereService.createMatiere(formData).subscribe(
           (response) => {
             console.log('Data saved successfully!', response);
             this.toastr.success('Data saved successfully!', 'Success');
@@ -240,7 +241,7 @@ this.findall();
   deleteData(id: any) {
     if (id) {
       document.getElementById('a_' + id)?.remove();
-      this.userService.deleteUser(id).subscribe(
+      this.matiereService.deleteMatiere(id).subscribe(
         () => {
           console.log('User deleted successfully');
           this.masterSelected = false;

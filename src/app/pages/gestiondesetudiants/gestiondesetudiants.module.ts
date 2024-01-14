@@ -17,17 +17,17 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 
 // Ng Search 
 import { NgPipesModule } from 'ngx-pipes';
-import { ListjsComponent } from './listjs/listjs.component';
 
 // Sorting page
-
-import { NgbdListSortableHeader } from './listjs/listjs-sortable.directive';
+import { CustomersComponent } from './customers/customers.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
-    ListjsComponent,
-    NgbdListSortableHeader,
-    NgbdListSortableHeader
+    CustomersComponent
+
   ],
   imports: [
     CommonModule,
@@ -37,10 +37,12 @@ import { NgbdListSortableHeader } from './listjs/listjs-sortable.directive';
     NgPipesModule,
     BsDatepickerModule,
     ModalModule,
+    CKEditorModule,
     FormsModule,
     ReactiveFormsModule,
     SimplebarAngularModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    StoreModule.forRoot({}),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
